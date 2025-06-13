@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,13 @@ public class TestController {
 	// 클래스 선언할 때 @RestController 선언할경우 여기서 @ResponseBody 생략해도 된다.
 	public @ResponseBody String hello(String name, String no) {
 		return "hello" + name + " " + no;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/hello2", method = RequestMethod.GET)
+	public String hello2(@RequestParam("name") String rename) {
+
+		return "hello" + rename;
 	}
 
 	@RequestMapping(value = "/getBoard", method = RequestMethod.GET)

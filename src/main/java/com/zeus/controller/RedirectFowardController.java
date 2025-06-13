@@ -1,15 +1,12 @@
 package com.zeus.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.zeus.domain.Board;
 
@@ -34,5 +31,22 @@ public class RedirectFowardController {
 
 		return "sub/gohome07";
 	}
+	
+	@ResponseBody
+	@GetMapping(value = "/gohome08")
+	public Map<String, Board> home08(Model model) {
+		log.info("자바빈즈 클래스 타입 home08");
+		Map<String, Board> map = new HashMap<>();
 
+		Board board = new Board();
+		board.setBoardNo(10);
+		map.put("key1", board);
+
+		Board board2 = new Board();
+		board2.setBoardNo(30);
+		map.put("key2", board2);
+
+		return map;
+
+	}
 }

@@ -1,6 +1,7 @@
 package com.zeus.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zeus.domain.Board;
+import com.zeus.domain.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,6 +38,12 @@ public class BoardController {
 	public String ajaxHome() {
 		log.info("headers 속성 매핑 ajaxHome");
 		return "/board/ajaxHome";
+	}
+
+	@GetMapping(value = "/ajaxArrayHome")
+	public String ajaxArrayHome() {
+		log.info("headers 속성 매핑 ajaxArrayHome");
+		return "/board/ajaxArrayHome";
 	}
 
 	@GetMapping(value = "/xmlHttpRequest")
@@ -96,4 +104,14 @@ public class BoardController {
 		return entity;
 	}
 
+	@PostMapping(value = "/registerArray")
+	public ResponseEntity<String> registerArray(@RequestBody List<Member> memberList) {
+		log.info("registerArray");
+		for (Member member : memberList) {
+			log.info("userId = " + member.getUserId());
+			log.info("password = " + member.getPassword());
+		}
+		ResponseEntity<String> entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		return entity;
+	}
 }
