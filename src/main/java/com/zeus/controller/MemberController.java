@@ -6,11 +6,14 @@ import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zeus.domain.Member;
 
@@ -93,5 +96,26 @@ public class MemberController {
 		log.info("originalName: " + originalFilename);
 		ResponseEntity<String> entity = new ResponseEntity<String>("UPLOAD SUCCESS" + originalFilename, HttpStatus.OK);
 		return entity;
+	}
+
+	@GetMapping(value = "/form")
+	public String form() {
+		log.info("form");
+		return "/member/form"; // 뷰 파일명
+	}
+
+	@PostMapping(value = "/submit") // RedirectAttributes rttr => 데이터를 임시로 세션에 저장 후 페이지 재요청 시 세션->Request
+	public String submit(@RequestParam String name, RedirectAttributes rttr, Model model) { // @RequestParam => 이름을 안 써도
+																							// 넘어오게 돼 있다?
+		log.info("submit name" + name);
+		rttr.addFlashAttribute("message", name + "님이 등록 되었습니다.");
+		model.addAttribute("name", name);
+		return "redirect:/member/result";
+	}
+
+	@GetMapping(value = "/result")
+	public String result() {
+		log.info("result");
+		return "member/result"; // 뷰 파일명
 	}
 }

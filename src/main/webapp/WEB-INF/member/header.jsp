@@ -9,6 +9,6 @@
 </head>
 <body>
 	<header>
-		<h1>Its HeaderArea.jsp PAGE</h1>
+		<h1>Its HeaderArea. form jsp PAGE</h1>
 	</header>
 	<hr>
