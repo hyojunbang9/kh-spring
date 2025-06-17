@@ -3,7 +3,10 @@ package com.zeus.controller;
 import java.io.File;
 import java.io.IOException;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -76,5 +79,19 @@ public class MemberController {
 			}
 		}
 		return "member/success";
+	}
+
+	@GetMapping(value = "/registerAjaxFileUpForm")
+	public String registerAjaxFileUpForm() {
+		log.info("registerAjaxFileUpForm");
+		return "member/registerAjaxFileUpForm"; // 뷰 파일명
+	}
+
+	@PostMapping(value = "/uploadAjax", produces = "text/plain;charset=UTF-8")
+	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
+		String originalFilename = file.getOriginalFilename();
+		log.info("originalName: " + originalFilename);
+		ResponseEntity<String> entity = new ResponseEntity<String>("UPLOAD SUCCESS" + originalFilename, HttpStatus.OK);
+		return entity;
 	}
 }
