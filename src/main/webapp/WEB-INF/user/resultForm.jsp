@@ -43,7 +43,10 @@
 						<br>
 					</c:forEach></td>
 			</tr>
-
+			<tr>
+				<td>E-MAIL</td>
+				<td>${user.email}</td>
+			</tr>
 		</table>
 	</main>
 	<hr>

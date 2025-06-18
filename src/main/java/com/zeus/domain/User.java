@@ -2,6 +2,7 @@ package com.zeus.domain;
 
 import java.util.ArrayList;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class User {
+	@NotBlank(message="userID 필수항목!")
 	private String userId;
+	@NotBlank(message="userNAME 필수항목!")
 	private String userName;
+	@NotBlank(message="userEMAIL 필수항목!")
+	private String email;
 	private String userPassword;
 	private String introduction;
 	private ArrayList<String> checkBoxList;
+	private String gender;
+	private String nationality;
+	
 
 }

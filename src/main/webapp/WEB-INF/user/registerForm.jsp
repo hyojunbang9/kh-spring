@@ -48,6 +48,19 @@
 					<td><form:checkboxes path="checkBoxList"
 							items="${hobbyBoxList}" itemValue="value" itemLabel="label" /></td>
 				</tr>
+				<tr>
+					<td>gender</td>
+					<td>${userGender}</td>
+				</tr>
+				<tr>
+					<td>nationality</td>
+					<td>${user.nationality}</td>
+				</tr>
+				<tr>
+					<td>E-MAIL</td>
+					<td><form:input path="email" /><font color="red"><form:errors
+								path="email" /></font></td>
+				</tr>
 			</table>
 			<form:button name="register">등록</form:button>
 		</form:form>

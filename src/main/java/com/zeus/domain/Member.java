@@ -29,4 +29,6 @@ public class Member {
 	private Date dateOfBirth;
 
 	private Board board;
+	private String gender;
 }
+
