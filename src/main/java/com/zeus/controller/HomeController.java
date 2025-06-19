@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 //사용자 요청을 받고 정보를 받는다.(http://127.0.0.1:8080/home)
 @Controller
 public class HomeController {
+	@Autowired
+	private MessageSource messageSource;
 
 	// http://127.0.0.1:8080/home -> get 방식
 	// Model,(Request, Session, Application)
@@ -132,5 +136,24 @@ public class HomeController {
 	@RequestMapping("/home1001")
 	public void home1001() {
 		log.info("/home1001");
+	}
+
+	@GetMapping(value = "/")
+	public String comeBackHome(Locale locale, Model model) {
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		String formattedDate = dateFormat.format(date);
+
+		log.info("환영합니다. 클라이언트 지역은 " + locale + "이다.");
+		String[] args = { "Lee", "HI" };
+		// 스프링 프레임워크로부터 MessageSource를 주입 받은 다음 getMessage 메서드를 호출한다.
+		String message = messageSource.getMessage("welcome.message", args, Locale.KOREAN);
+		String message2 = messageSource.getMessage("welcome.message", args, Locale.ENGLISH);
+		log.info("Welcome message : " + message);
+		log.info("Welcome message2 : " + message2);
+
+		model.addAttribute("serverTime", formattedDate);
+
+		return "home"; // 뷰 파일명
 	}
 }
